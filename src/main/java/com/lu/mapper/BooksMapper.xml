@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lu.mapper.BooksMapper">
+
+    <insert id="addBooks" parameterType="Books">
+        insert into book.book (book_title, book_detail, book_picture, book_subject, book_type, book_releaser_id)
+        value (#{book_title}, #{book_detail}, #{book_picture}, #{book_subject}, #{book_type}, #{book_releaser_id})
+    </insert>
+
+    <delete id="deleteBookById" parameterType="_int">
+        delete from book.book where book_id = #{book_id}
+    </delete>
+
+    <select id="queryBooksByTitle" parameterType="string" resultType="Books">
+        select * from book.book where book_title like "%"#{book_title}"%"
+    </select>
+
+    <select id="queryAllBooks" resultType="Books">
+        select * from book.book order by book_update_time desc
+    </select>
+
+    <select id="queryBookDetailById" resultType="Books">
+        select * from book.book where book_id = #{book_id}
+    </select>
+
+    <select id="queryMyBookById" resultType="Books">
+        select * from book.book where book_releaser_id = #{user_id}
+    </select>
+
+    <select id="queryBooksBySubject" resultType="Books">
+        select * from book.book where book_subject = #{subject}
+    </select>
+
+</mapper>

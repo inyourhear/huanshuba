@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lu.mapper.UserMapper">
+
+    <insert id="addUser" parameterType="string">
+        insert into book.user (openid, nickname, user_photo)
+        value (#{openid}, #{nickname}, #{user_photo})
+    </insert>
+
+    <delete id="deleteUserById" parameterType="int">
+        delete from book.user where user_id = #{userId}
+    </delete>
+
+    <select id="queryUserIdByOpenId" parameterType="string" resultType="Integer">
+        select user_id from book.user where openid = #{openId}
+    </select>
+
+    <select id="queryUserByBookReleaseId" parameterType="_int" resultType="User">
+        select nickname, user_photo from book.user where user_id = #{book_releaser_id}
+    </select>
+
+    <select id="queryNicknameByNoteSenderId" parameterType="_int" resultType="string">
+        select nickname from book.user where user_id = #{note_sender_id}
+    </select>
+
+    <insert id="identity" parameterType="int">
+        insert into book.user_info (userId, student_id) = (#{userId}, #{student_id})
+    </insert>
+
+</mapper>

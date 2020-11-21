@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lu.mapper.NoteMapper">
+
+    <select id="queryBookNote" resultType="Note">
+        select note_content, note_sender_id, note_book_id, note_receiver_id from book.note where note_book_id = #{book_id}
+    </select>
+
+    <select id="queryMyNote" resultType="Note">
+        select * from book.note where note_receiver_id = #{user_id}
+    </select>
+
+    <insert id="addNote" parameterType="Note">
+        insert into book.note (note_book_id, note_sender_id, note_receiver_id, note_content)
+        value (#{note_book_id}, #{note_sender_id}, #{note_receiver_id}, #{note_content})
+    </insert>
+
+</mapper>
